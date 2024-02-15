@@ -15,4 +15,7 @@ class Player {
     loseHints() {
         this.hints--
     }
+    playerGuess() {
+
+    }
 }

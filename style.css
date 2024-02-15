@@ -1,0 +1,23 @@
+#start-screen {
+    width: 100%;
+    height: 100vh;
+    background-image: url("/guessing-game/assets/BACKGROUND.jpg");
+    background-size: cover;
+    border-radius: 40px;
+    opacity: 80%;    
+    
+}
+#start-button {
+width: 20%;
+position: center; 
+font-size: larger;
+font-weight: bold;
+background-color: goldenrod;
+margin-left:  40%;
+margin-top: 500px;
+padding: 20px 0;
+border: 4mm ridge rgba(37, 33, 33, 0.8);
+border-radius: 20px;
+
+
+}

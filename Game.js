@@ -1,5 +1,8 @@
 class Game {
-    constructor(player,levels) {
+    constructor(player,levels,pics) {
+        this.startScreen = document.getElementById("start-screen");
+        this.gameEndScreen = document.getElementById("game-end");
+        this.pics = pics 
         this.player = player
         this.levels = levels
         this.currentLevel = 0
