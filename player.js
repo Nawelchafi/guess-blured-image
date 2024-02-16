@@ -1,7 +1,7 @@
 class Player {
     constructor(level, hints) {
         this.level = level
-        this.hints = hints
+        this.hints = 0
         this.score = 0
     }
 

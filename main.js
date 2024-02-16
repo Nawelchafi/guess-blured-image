@@ -11,17 +11,17 @@ const pics = [
   { name: 'Sagrada Familia', img: 'Sagrada-Familia.jpg' , caption: ""},
 
 ];
-let game = new Game(pics); 
 
+startButton = document.getElementById("start-button")
 window.onload = function () {
  // let game;
-  startButton.onclick( function () {
+  startButton.onclick = function () {
     startGame();
-  });
+  };
 
   function startGame() {
     console.log("start game");
-    game = new Game(); 
+    game = new Game(1,pics); 
 
     game.start(); 
   }

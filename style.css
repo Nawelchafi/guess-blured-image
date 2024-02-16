@@ -1,7 +1,7 @@
 #start-screen {
     width: 100%;
     height: 100vh;
-    background-image: url("/guessing-game/assets/BACKGROUND.jpg");
+    background-image: url("../assets/BACKGROUND.jpg");
     background-size: cover;
     border-radius: 40px;
     opacity: 80%;    
@@ -20,4 +20,10 @@ border: 4mm ridge rgba(37, 33, 33, 0.8);
 border-radius: 20px;
 
 
+}
+#game-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
