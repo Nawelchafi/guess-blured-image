@@ -1,4 +1,4 @@
-class Player {
+/*class Player {
     constructor(level, hints) {
         this.level = level
         this.hints = 0
@@ -19,3 +19,4 @@ class Player {
 
     }
 }
+*/

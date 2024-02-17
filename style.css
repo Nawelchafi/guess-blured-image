@@ -4,7 +4,7 @@
     background-image: url("../assets/BACKGROUND.jpg");
     background-size: cover;
     border-radius: 40px;
-    opacity: 80%;    
+    
     
 }
 #start-button {
@@ -18,12 +18,17 @@ margin-top: 500px;
 padding: 20px 0;
 border: 4mm ridge rgba(37, 33, 33, 0.8);
 border-radius: 20px;
-
-
 }
 #game-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.background  {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.game-image {
+    width: 400px;
+    height: 400px; 
 }

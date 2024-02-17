@@ -1,24 +1,20 @@
 class Game {
-    constructor(player,levels,pics) {
+    constructor(pics) {
         this.startScreen = document.getElementById("start-screen");
         this.gameEndScreen = document.getElementById("game-end");
         this.pics = pics 
-        this.player = new Player (level,hints)
-        this.levels = levels
+        this.levels = 3
         this.currentLevel = 0
         this.isGameOver = false;
     }
     
+    
    startGame() {
-    // Clear the start screen content
-    this.startScreen.innerHTML = "";
-
-    // Get a random picture from the pics array
     const index = Math.floor(Math.random() * this.pics.length);
+    console.log(index)
     const randomPic = this.pics[index];
-
+    // Get a random picture from the pics array
     // Create elements
-    const picContainer = document.getElementById("game-container");
     const image = document.createElement("img");
     const label = document.createElement("label");
     const input = document.createElement("input");
@@ -36,9 +32,10 @@ class Game {
     label.classList.add("game-label");
     input.classList.add("game-input");
     checkButton.classList.add("check-button");
-
-    // Append elements to the container
-    picContainer.innerHTML = ""; // Clear previous content
+    const picContainer = document.getElementById("game-container");
+    picContainer.innerHTML = ''
+    // Append elements to the container and hide the start button
+    document.getElementById('start-button').style.display = 'none';  
     picContainer.appendChild(image);
     picContainer.appendChild(document.createElement("br")); // Line break
     picContainer.appendChild(label);
@@ -47,15 +44,19 @@ class Game {
     picContainer.appendChild(document.createElement("br"));
     picContainer.appendChild(checkButton);
     checkButton.addEventListener("click", () => {
-        this.checkGuess(input.value.toLowerCase(), index);
+     
+    this.checkGuess(input.value.toLowerCase(), index);
     });
 }
     checkGuess(playerGuess,pictureIndex) {
     const correctAnswer = this.pics[pictureIndex].name.toLowerCase();
      if (playerGuess === correctAnswer) {
-       //this.displayCaption()
+       //this.displayCaption()s
        //this.nextpic()
        console.log("correct!")
+       pics.splice(pictureIndex, 1)
+       this.startGame()
+       
      }
      else {
         this.end()
@@ -69,6 +70,7 @@ class Game {
     }   
        end () {
         this.isGameOver = true
+        console.log(this.isGameOver)
        }
     }
 

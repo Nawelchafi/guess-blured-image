@@ -14,16 +14,9 @@ const pics = [
 
 startButton = document.getElementById("start-button")
 window.onload = function () {
- // let game;
+ let game = new Game(pics)
   startButton.onclick = function () {
-    startGame();
+    game.startGame();
   };
-
-  function startGame() {
-    console.log("start game");
-    game = new Game(1,pics); 
-
-    game.start(); 
-  }
 
 }
