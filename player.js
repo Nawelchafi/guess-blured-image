@@ -1,22 +1,20 @@
-/*class Player {
-    constructor(level, hints) {
-        this.level = level
-        this.hints = 0
+class Player {
+    constructor() {
+        
+        this.hints = null
         this.score = 0
+    
     }
 
     assignHints() {
-        if (this.level === 1)  this.hints = 10
-         else if (this.level === 2)  this.hints = 5
-         else if (this.level === 3)  this.hints = 2
+        if (this.levels === 1)  this.hints = 10
+         else if (this.level === 2)  this.hints = 6
+         else if (this.level === 3)  this.hints = 4
         
     }
 
     loseHints() {
         this.hints--
     }
-    playerGuess() {
-
-    }
+    
 }
-*/

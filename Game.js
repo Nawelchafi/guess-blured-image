@@ -2,18 +2,29 @@ class Game {
     constructor(pics) {
         this.startScreen = document.getElementById("start-screen");
         this.gameEndScreen = document.getElementById("game-end");
-        this.pics = pics 
-        this.levels = 3
+        //this.this.pics = pics
+        this.pics = pics
+        this.score = 0
+        this.hints = null
         this.currentLevel = 0
+        this.usedIndex = []
         this.isGameOver = false;
     }
-    
-    
+    uniqueGenerate () {
+
+    }
+
    startGame() {
-    const index = Math.floor(Math.random() * this.pics.length);
-    console.log(index)
-    const randomPic = this.pics[index];
-    // Get a random picture from the pics array
+     let index;
+     let randomPic;
+    do {
+        index = Math.floor(Math.random() * this.pics.length);
+    } while (this.usedIndex.includes(index));
+
+    randomPic = this.pics[index];
+    this.usedIndex.push(index);
+     console.log("used index list :", this.usedIndex)
+     //uniqueGenerate ()
     // Create elements
     const image = document.createElement("img");
     const label = document.createElement("label");
@@ -51,12 +62,13 @@ class Game {
     checkGuess(playerGuess,pictureIndex) {
     const correctAnswer = this.pics[pictureIndex].name.toLowerCase();
      if (playerGuess === correctAnswer) {
-       //this.displayCaption()s
-       //this.nextpic()
+       //this.displayCaption()
        console.log("correct!")
-       pics.splice(pictureIndex, 1)
-       this.startGame()
-       
+       this.score ++
+       console.log("your score is" , this.score)
+        this.nextLevel()
+        this.startGame()
+      
      }
      else {
         this.end()
@@ -64,14 +76,27 @@ class Game {
 
 }
     nextLevel() {
-       if (this.currentLevel<this.levels)
+       if (this.score == 3){
        this.currentLevel++
-       else this.end()
+        
+    }
+       else return
     }   
        end () {
         this.isGameOver = true
         console.log(this.isGameOver)
        }
+     assignHints() {
+        if (this.currentLevel === 1)  this.hints = 10
+         else if (this.currentLevel === 2)  this.hints = 6
+         else if (this.currentLevel === 3)  this.hints = 4
+        
+    }
+     loseHints() {
+        if (playerGuess !== correctAnswer)
+        console.assert.log("hints now are" , this.hints)
+        this.hints--
+    }
     }
 
     
