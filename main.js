@@ -18,3 +18,4 @@ window.onload = function () {
   };
 
 }
+    const picContainer = document.getElementById("game-container");

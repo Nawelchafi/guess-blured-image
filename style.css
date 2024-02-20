@@ -1,11 +1,16 @@
 #start-screen {
     width: 100%;
     height: 100vh;
-    background-image: url("../assets/BACKGROUND.jpg");
+    background-image: url(../assets/BACKGROUND.jpg);
     background-size: cover;
     border-radius: 40px;
-    
-    
+    DISPLAY: flex;
+    ALIGN-ITEMS: center;
+    JUSTIFY-CONTENT: center;
+}
+
+feuille de style de l’agent utilisateur div {
+    display: block;
 }
 #start-button {
 width: 20%;
@@ -13,8 +18,7 @@ position: center;
 font-size: larger;
 font-weight: bold;
 background-color: goldenrod;
-margin-left:  40%;
-margin-top: 500px;
+
 padding: 20px 0;
 border: 4mm ridge rgba(37, 33, 33, 0.8);
 border-radius: 20px;
@@ -32,3 +36,61 @@ border-radius: 20px;
     width: 400px;
     height: 400px; 
 }
+        @font-face {
+            font-family: caption-font;
+            src: url(history.otf)
+        }
+    
+        #pic-caption-container {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+    
+            background-image: url("brownPaper.jpg");
+            background-size: cover;
+            border: 2px solid #6c553a;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    
+        #pic-caption-container img {
+            max-width: 100%;
+    
+            border-radius: 5px;
+    
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    
+        }
+    
+        #skip-button-container {
+            display: grid;
+            grid-template-rows: auto 40px;
+        }
+    
+        #caption {
+            font-family: caption-Font;
+            font-size: 20px;
+            color: black;
+            text-align: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+    
+        #skip-button {
+            padding: 10px 20px;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 16px;
+            color: #fff;
+            background-color: #6c553a;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+    
+        #skip-button:hover {
+            background-color: #543e29;
+        }
