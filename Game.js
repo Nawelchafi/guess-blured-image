@@ -2,6 +2,7 @@ class Game {
     constructor(pics) {
         this.startScreen = document.getElementById("start-screen");
         this.gameEndScreen = document.getElementById("game-end");
+        this.picContainer = document.getElementById("game-container")
         //this.this.pics = pics
         this.pics = pics
         this.score = 0
@@ -9,12 +10,12 @@ class Game {
         this.currentLevel = 0
         this.usedIndex = []
         this.isGameOver = false;
-    }
-    uniqueGenerate () {
+        this.blurPercentage = null
+        
 
     }
-
    startGame() {
+     this.blurPercentage = 10 
      let index;
      let randomPic;
     do {
@@ -33,7 +34,7 @@ class Game {
 
     // Set attributes and content for the elements
     image.src = `./assets/${randomPic.img}`;
-    label.textContent = "Enter your guess:";
+    label = "Enter your guess:";
     input.type = "text";
     checkButton.textContent = "Check Answer";
 
@@ -43,16 +44,22 @@ class Game {
     label.classList.add("game-label");
     input.classList.add("game-input");
     checkButton.classList.add("check-button");
-    picContainer.innerHTML = ''
+    this.picContainer.innerHTML = ''
     // Append elements to the container and hide the start button
     document.getElementById('start-button').style.display = 'none';  
-    picContainer.appendChild(image);
-    picContainer.appendChild(document.createElement("br")); // Line break
-    picContainer.appendChild(label);
-    picContainer.appendChild(document.createElement("br"));
-    picContainer.appendChild(input);
-    picContainer.appendChild(document.createElement("br"));
-    picContainer.appendChild(checkButton);
+    this.picContainer.appendChild(image);
+    this.picContainer.appendChild(document.createElement("br")); // Line break
+    this.picContainer.appendChild(label);
+    this.picContainer.appendChild(document.createElement("br"));
+    this.picContainer.appendChild(input);
+    this.picContainer.appendChild(document.createElement("br"));
+    this.picContainer.appendChild(checkButton);
+    const imageElement = document.querySelector(".game-image");
+    imageElement.addEventListener("click", () => {
+      this.reduceBlur();
+      //this.decreaseHints();
+      
+    });
     checkButton.addEventListener("click", () => {
      
     this.checkGuess(input.value.toLowerCase(), index);
@@ -64,15 +71,14 @@ class Game {
        //this.displayCaption()
        console.log("correct!")
        this.score ++
-       picContainer.style.display = 'none'
-       const imageSrc = this.pics[pictureIndex].src;
-       console.log(imageSrc)
+       this.picContainer.style.display = 'none'
+       const imageSrc =`./assets/${this.pics[pictureIndex].img}`
        const captionText = this.pics[pictureIndex].caption;
        const imgElement = document.getElementById('pic');
         imgElement.src = imageSrc;
 
-  const captionElement = document.getElementById('caption').querySelector('p');
-  captionElement.textContent = captionText;
+  const captionElement = document.getElementById('caption');
+  captionElement.textContent += captionText;
 
   const containerElement = document.getElementById('pic-caption-container');
   containerElement.style.display = 'grid'; // Display the container
@@ -80,7 +86,7 @@ class Game {
   // Hide the container after 5 seconds
   setTimeout(() => {
     containerElement.style.display = 'none';
-    picContainer.style.display= 'initial'  }, 5000);
+    this.picContainer.style.display= 'flex'  }, 5000);
        console.log("your score is" , this.score)
         this.nextLevel()
         this.startGame()
@@ -110,11 +116,22 @@ class Game {
          else if (this.currentLevel === 3)  this.hints = 4
         
     }
-     loseHints() {
-        if (playerGuess !== correctAnswer)
-        console.assert.log("hints now are" , this.hints)
-        this.hints--
+     decreaseHints() {
+         this.hints--;
+         console.log(`Hints left: ${this.hints}`);
+       
     }
+    reduceBlur() {
+      const imageElement = document.querySelector(".game-image");
+      this.blurPercentage -= 2; // Reduce blur 
+      imageElement.style.filter = `blur(${this.blurPercentage}px)`
+    
+  }
+
+ 
+    ;
+  
+      
     }
 
 // plan for tomorrow 

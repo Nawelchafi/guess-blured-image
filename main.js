@@ -15,7 +15,7 @@ window.onload = function () {
  let game = new Game(pics)
   startButton.onclick = function () {
     game.startGame(pics);
+    document.getElementById("game-container").style.display = "flex"
   };
 
 }
-    const picContainer = document.getElementById("game-container");
