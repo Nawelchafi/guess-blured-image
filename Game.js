@@ -12,86 +12,109 @@ class Game {
         this.timer = null;
     }
 
-  startGame() {
-    this.blurPercentage = 10;
-    let index;
-    let randomPic;
-    do {
-        index = Math.floor(Math.random() * this.pics.length);
-    } while (this.usedIndex.includes(index));
+    startGame() {
+        this.blurPercentage = 10;
+        let index;
+        let randomPic;
+        do {
+            index = Math.floor(Math.random() * this.pics.length);
+        } while (this.usedIndex.includes(index));
 
-    randomPic = this.pics[index];
-    this.usedIndex.push(index);
-    console.log("used index list :", this.usedIndex);
+        randomPic = this.pics[index];
+        this.usedIndex.push(index);
+        console.log("used index list :", this.usedIndex);
 
-    const image = document.createElement("img");
-    const label = document.createElement("label");
-    const input = document.createElement("input");
-    const checkButton = document.createElement("button");
-    const timerDisplay = document.createElement("div");
+        const image = document.createElement("img");
+        const label = document.createElement("label");
+        const input = document.createElement("input");
+        const checkButton = document.createElement("button");
+        const timerDisplay = document.createElement("div");
 
-    image.src = `./assets/${randomPic.img}`;
-    label.innerHTML = "Enter your guess:";
-    input.type = "text";
-    checkButton.textContent = "Check Answer";
-    timerDisplay.textContent = "";
+        image.src = `./assets/${randomPic.img}`;
+        label.innerHTML = "Enter your guess:";
+        input.type = "text";
+        checkButton.textContent = "Check Answer";
+        timerDisplay.textContent = "";
 
-    image.classList.add("game-image");
-    label.classList.add("game-label");
-    input.classList.add("game-input");
-    checkButton.classList.add("check-button");
-    timerDisplay.classList.add("timer-display");
+        image.classList.add("game-image");
+        label.classList.add("game-label");
+        input.classList.add("game-input");
+        checkButton.classList.add("check-button");
+        timerDisplay.classList.add("timer-display");
 
-    this.picContainer.innerHTML = "";
-    document.getElementById("start-button").style.display = "none";
-    document.getElementById("instruction-button").style.display = "none";
-    this.picContainer.appendChild(image);
-    this.picContainer.appendChild(document.createElement("br"));
-    this.picContainer.appendChild(label);
-    this.picContainer.appendChild(document.createElement("br"));
-    this.picContainer.appendChild(input);
-    this.picContainer.appendChild(document.createElement("br"));
-    this.picContainer.appendChild(checkButton);
-    this.picContainer.appendChild(timerDisplay);
-   const scoreDisplay = document.createElement("div");
-    scoreDisplay.classList.add("score-display");
-    this.picContainer.insertBefore(scoreDisplay, image);
+        this.picContainer.innerHTML = "";
+        document.getElementById("start-button").style.display = "none";
+        document.getElementById("instruction-button").style.display = "none";
+        this.picContainer.appendChild(image);
+        this.picContainer.appendChild(document.createElement("br"));
+        this.picContainer.appendChild(label);
+        this.picContainer.appendChild(document.createElement("br"));
+        this.picContainer.appendChild(input);
+        this.picContainer.appendChild(document.createElement("br"));
+        this.picContainer.appendChild(checkButton);
+        this.picContainer.appendChild(timerDisplay);
+        const scoreDisplay = document.createElement("div");
+        scoreDisplay.classList.add("score-display");
+        this.picContainer.insertBefore(scoreDisplay, image);
 
-    // Create hints display element
-    const hintsDisplay = document.createElement("div");
-    hintsDisplay.classList.add("hints-display");
-    this.picContainer.insertBefore(hintsDisplay, image);
+        // Create hints display element
+        const hintsDisplay = document.createElement("div");
+        hintsDisplay.classList.add("hints-display");
+        this.picContainer.insertBefore(hintsDisplay, image);
 
-    image.addEventListener("click", () => {
-        this.reduceBlur();
-        if (this.score < 3) {
+        image.addEventListener("click", () => {
+            this.reduceBlur();
             this.hints--;
-            hintsDisplay.textContent = `Hints: ${this.hints}`;
+                hintsDisplay.textContent = `Hints: ${this.hints}`;
+            
+        });
+
+        if (this.score < 3) {
+            this.hints = 3;
+            this.displayRandomLetters(randomPic.name.toLowerCase(), input);
+        } else if (this.score >= 3 && this.score <= 9) {
+            this.hints = 2;
+        } else {
+            this.hints = 0;
+            this.startTimer(30, timerDisplay);
         }
-    });
+        scoreDisplay.textContent = `Score: ${this.score}`;
+        hintsDisplay.textContent = `Hints: ${this.hints}`;
+        checkButton.addEventListener("click", () => {
+            this.checkGuess(input.value.toLowerCase(), index);
+        });
 
-
-    if (this.score < 3) {
-        this.hints = 5;
-    } else if (this.score >= 6 && this.score <= 9) {
-        this.hints = 2;
-    } else {
-        this.hints = 0;
+        // Clear previous timer and start a new one for each new picture
+        clearInterval(this.timer);
+        if (this.score > 7) {
+            this.startTimer(30, timerDisplay);
+        }
     }
-    scoreDisplay.textContent = `Score: ${this.score}`;
-    hintsDisplay.textContent = `Hints: ${this.hints}`;
-    checkButton.addEventListener("click", () => {
-        this.checkGuess(input.value.toLowerCase(), index);
-    });
 
-    // Clear previous timer and start a new one for each new picture
-    clearInterval(this.timer);
-    if (this.score > 3) {
-        this.startTimer(30, timerDisplay);
+    displayRandomLetters(correctAnswer, inputField) {
+        const letters = correctAnswer.split('');
+        const randomLetters = [];
+        while (randomLetters.length < 5) {
+            const randomCharCode = Math.floor(Math.random() * 26) + 97; // Random lowercase letter ASCII code
+            const randomLetter = String.fromCharCode(randomCharCode);
+            if (!letters.includes(randomLetter)) {
+                randomLetters.push(randomLetter);
+            }
+        }
+        const allLetters = letters.concat(randomLetters).sort(() => Math.random() - 0.5);
+        const lettersContainer = document.createElement('div');
+        lettersContainer.classList.add('letters-container');
+        allLetters.forEach(letter => {
+            const letterElement = document.createElement('span');
+            letterElement.textContent = letter;
+            letterElement.classList.add('letter');
+            letterElement.addEventListener('click', () => {
+                inputField.value += letter;
+            });
+            lettersContainer.appendChild(letterElement);
+        });
+        this.picContainer.insertBefore(lettersContainer, inputField);
     }
-}
-
-
 
     checkGuess(playerGuess, pictureIndex) {
         const correctAnswer = this.pics[pictureIndex].name.toLowerCase();
@@ -126,7 +149,7 @@ class Game {
     nextLevel() {
         if (this.score == 3) {
             this.currentLevel++;
-        } else if (this.score == 10) {
+        } else if (this.score > 10) {
             this.end();
         }
     }
@@ -142,8 +165,6 @@ class Game {
             window.location.reload();
         });
         gameOverContainer.classList.add('end-screen')
-        gameOverContainer.appendChild(document.createElement("div"));
-        gameOverContainer.classList.add('end-button')
         gameOverContainer.innerHTML = '<p>Game Over</p><br><p>good luck next time </p>'
         gameOverContainer.appendChild(restartButton);
         this.picContainer.innerHTML = "";
@@ -152,8 +173,8 @@ class Game {
 
     reduceBlur() {
         const imageElement = document.querySelector(".game-image");
-        this.blurPercentage -= 2;
-        imageElement.style.filter = `blur(${this.blurPercentage}px)`;
+         if (this.hints > 0) {this.blurPercentage -= 2;
+        imageElement.style.filter = `blur(${this.blurPercentage}px)`;}
     }
 
     startTimer(duration, display) {
