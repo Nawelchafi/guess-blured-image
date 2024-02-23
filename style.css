@@ -13,10 +13,8 @@
     JUSTIFY-CONTENT: center;
 }
 
-feuille de style de l’agent utilisateur div {
-    display: block;
-}
-#start-button {
+
+#start-button , #instruction-button , .restart-button {
     width: 20%;
     position: center; 
     font-size: larger;
@@ -25,11 +23,26 @@ feuille de style de l’agent utilisateur div {
     margin: 5px;
     padding: 20px 0;
     border: 4mm ridge rgba(37, 33, 33, 0.4);
-    border-radius: 20px;
+    border-radius: 30px;
 }
 #start-button:hover {
     background-color: rgb(186, 138, 16);
     width: 22%;
+}
+#instruction-button:hover {
+    background-color: rgb(186, 138, 16);
+    width: 22%;
+}
+.restart-button {
+    width: auto;
+     font-size: larger;
+    font-family: caption-font; 
+    font-weight: bold;
+    background-color: goldenrod;
+    margin: 5px;
+    border: 4mm ridge rgba(37, 33, 33, 0.4);
+    border-radius: 30px;
+    padding: 20px 0;
 }
 #game-container {
     display: none;
@@ -46,26 +59,42 @@ feuille de style de l’agent utilisateur div {
 }
 .game-image {
     width: 500px;
-    height: 500px; 
+    height: 400px; 
     filter: blur(10px);
     border-radius: 6px;
     border: #fff;
 }
+
         
     .game-label{
         font-size: 40px;
         font-family: caption-font;
-        color: white;
+        color:white;
     }
         input[type=text] {
             width: 20%;
-            padding: 4px 4px;
-            margin: 8px 0;
+            padding: 10px 4px;
+            margin: 10px 5px;
             box-sizing: border-box;
             font-family: caption-font;
             font-size: 30px;
             text-align: center;
+            background-color: goldenrod;
+            border: 4px solid rgb(30, 23, 17);
+            outline: none;
         }
+    .check-button {
+    padding: 10px 20px;
+    background-color: goldenrod;
+    border: 4mm ridge rgba(37, 33, 33, 0.4);
+    border-radius: 70%;
+    font-family: caption-font;
+    font-size: larger;
+    border-radius: 30px;
+    }
+    .status {
+        font-size: 100px;
+    }
     #pic-caption-container {
     display: none;
     grid-template-columns: 1fr 1fr;
@@ -91,11 +120,8 @@ feuille de style de l’agent utilisateur div {
     
     }
     
-        #skip-button-container {
-            display: grid;
-            grid-template-rows: auto 40px;
-        }
-    
+
+        
         #caption {
             font-family: caption-Font;
             font-size: 30px;
@@ -106,7 +132,7 @@ feuille de style de l’agent utilisateur div {
         }
     
         #skip-button {
-            padding: 10px 20px;
+            padding: 5px 20px;
             font-family: 'Times New Roman', Times, serif;
             font-size: 16px;
             color: #fff;
@@ -115,8 +141,23 @@ feuille de style de l’agent utilisateur div {
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
+            text-align: center;
         }
     
         #skip-button:hover {
             background-color: #543e29;
+        }
+        .end-screen {
+            font-family: caption-font;
+            width: 800px;
+            height: 600px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 10%;
+            background-image: url('/brownPaper.jpg');
+            font-size: 40px;
+            display: flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items: center;
         }
