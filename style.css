@@ -1,5 +1,5 @@
 @font-face {
-    font-family: caption-font;
+    font-family: font;
     src: url(history.otf)
 }
 #start-screen {
@@ -36,7 +36,7 @@
 .restart-button {
     width: auto;
      font-size: larger;
-    font-family: caption-font; 
+    font-family: font; 
     font-weight: bold;
     background-color: goldenrod;
     margin: 5px;
@@ -68,7 +68,7 @@
         
     .game-label{
         font-size: 40px;
-        font-family: caption-font;
+        font-family: font;
         color:white;
     }
         input[type=text] {
@@ -76,7 +76,7 @@
             padding: 10px 4px;
             margin: 10px 5px;
             box-sizing: border-box;
-            font-family: caption-font;
+            font-family: font;
             font-size: 30px;
             text-align: center;
             background-color: goldenrod;
@@ -88,7 +88,7 @@
     background-color: goldenrod;
     border: 4mm ridge rgba(37, 33, 33, 0.4);
     border-radius: 70%;
-    font-family: caption-font;
+    font-family: font;
     font-size: larger;
     border-radius: 30px;
     }
@@ -123,7 +123,8 @@
 
         
         #caption {
-            font-family: caption-Font;
+            padding-top: 50px;
+            font-family: font;
             font-size: 30px;
             color: black;
             text-align: center;
@@ -147,8 +148,32 @@
         #skip-button:hover {
             background-color: #543e29;
         }
+                .score-display,
+                .hints-display {
+                    padding: 5px 20px;
+                    border: 2px solid black;
+                    border-radius: 10px;
+                    color: black;
+                    background-color: goldenrod;
+                }
+        span {
+            font-size: 40px;
+            padding: 3px 10px;
+            font-family: font;
+            background-color: rgb(221, 221, 198);
+            border-radius: 5px;
+            margin: 2px;
+            border: 1px solid black;
+        }
+        .timer{
+            padding: 2px 15px;
+            margin: 3px;
+            background-color: rgb(221, 221, 198);
+            border-radius: 5px;
+            font-size: larger;
+        }
         .end-screen {
-            font-family: caption-font;
+            font-family: font;
             width: 800px;
             height: 600px;
             background-repeat: no-repeat;

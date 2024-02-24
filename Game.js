@@ -13,6 +13,7 @@ class Game {
     }
 
     startGame() {
+      
         this.blurPercentage = 10;
         let index;
         let randomPic;
@@ -65,7 +66,9 @@ class Game {
         image.addEventListener("click", () => {
             this.reduceBlur();
             this.hints--;
-                hintsDisplay.textContent = `Hints: ${this.hints}`;
+            if (this.hints < 0) hintsDisplay.textContent = `Hints: 0`;
+
+                if (this.hints  >= 0)hintsDisplay.textContent = `Hints: ${this.hints}`;
             
         });
 
@@ -81,7 +84,7 @@ class Game {
         scoreDisplay.textContent = `Score: ${this.score}`;
         hintsDisplay.textContent = `Hints: ${this.hints}`;
         checkButton.addEventListener("click", () => {
-            this.checkGuess(input.value.toLowerCase(), index);
+            this.checkGuess(input.value.toLowerCase().trim(), index);
         });
 
         // Clear previous timer and start a new one for each new picture
@@ -120,6 +123,8 @@ class Game {
         const correctAnswer = this.pics[pictureIndex].name.toLowerCase();
         if (playerGuess === correctAnswer) {
             console.log("correct!");
+            var audio = new Audio('correct.mp3');
+            audio.play();
             this.score++;
             this.picContainer.style.display = "none";
             const imageSrc = `./assets/${this.pics[pictureIndex].img}`;
@@ -128,7 +133,7 @@ class Game {
             imgElement.src = imageSrc;
 
             const captionElement = document.getElementById("caption");
-            captionElement.textContent += captionText;
+            captionElement.textContent = captionText;
 
             const containerElement = document.getElementById("pic-caption-container");
             containerElement.style.display = "grid";
@@ -149,12 +154,15 @@ class Game {
     nextLevel() {
         if (this.score == 3) {
             this.currentLevel++;
-        } else if (this.score > 10) {
+        } else if (this.score > 13) {
             this.end();
         }
     }
+   
 
     end() {
+      var audio = new Audio('gameOver.mp3');
+      audio.play();
         this.isGameOver = true;
         console.log(this.isGameOver);
         const gameOverContainer = document.createElement("div");
@@ -180,12 +188,15 @@ class Game {
     startTimer(duration, display) {
         let timeLeft = duration;
         this.timer = setInterval(() => {
-            display.textContent = `Time left: ${timeLeft} seconds`;
+            display.innerHTML = `<p>Time left: ${timeLeft} seconds</p>`;
+            display.classList.add ('timer')
+
             timeLeft -= 1;
             if (timeLeft < 0) {
                 clearInterval(this.timer);
                 this.end();
             }
         }, 1000);
-    }
+    
+}
 }
