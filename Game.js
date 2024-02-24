@@ -150,8 +150,7 @@ class Game {
             this.end();
         }
     }
-
-    nextLevel() {
+ nextLevel() {
         if (this.score == 3) {
             this.currentLevel++;
         } else if (this.score > 13) {
